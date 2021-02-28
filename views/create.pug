@@ -1,0 +1,24 @@
+html
+    head
+        title User Manager
+    body
+        h2 Create User
+            table
+                tr
+                    th First Name
+                    th Last Name
+                    th Email
+                    th Age
+                tr
+                form(method='POST', action='/list')
+                    td
+                        input(name='first', type='text', placeholder='First Name')
+                    td
+                        input(name='last', type='text', placeholder='Last Name')
+                    td
+                        input(name='email', type='email', placeholder='Email')
+                    td
+                        input(name='age', type='number', placeholder='Age')
+                    td
+                        input(type='submit')
+        a(href='/') Home

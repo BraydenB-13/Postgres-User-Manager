@@ -1,0 +1,33 @@
+html
+    head
+        title User Manager
+    body
+        h2 Users
+        form(action='/sort', method='post')
+            input(name='search', placeholder='Search by first name')
+            input(type='submit', name='sort', value='search')
+            button(type='submit', name='sort', value='ascending') Sort by First Name ascending
+            button(type='submit', name='sort', value='descending') Sort by First Name descending
+        table
+            tr
+                form(action='/filter', method='post')
+                    th ID
+                    th First Name 
+                    th Last Name 
+                    th Email 
+                    th Age
+                    th Edit
+                    th Delete
+            each user in users
+                tr
+                    td #{user.id}
+                    td #{user.first}
+                    td #{user.last}
+                    td #{user.email}
+                    td #{user.age}
+                    td
+                        a(href=`/edit/${user.id}`) edit
+                    td
+                        form(action=`/remove/${user.id}`, method='post')
+                            button(type='submit') delete
+        a(href='/') Home

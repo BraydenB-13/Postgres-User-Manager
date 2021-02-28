@@ -1,0 +1,27 @@
+html
+    head
+        title User Manager
+    body
+        h2 Edititng #{user.first} #{user.last}
+            table
+                tr
+                    th ID
+                    th First Name
+                    th Last Name
+                    th Email
+                    th Age
+                tr
+                form(method='POST', action=`/edit/${user.id}`)
+                    td #{user.id}
+                        input(name='id', type='hidden', value=user.id)
+                    td
+                        input(name='first', value=user.first)
+                    td
+                        input(name='last', value=user.last)
+                    td
+                        input(name='email', value=user.email)
+                    td
+                        input(name='age', value=user.age)
+                    td
+                        input(type='submit')
+        a(href='/') Home
