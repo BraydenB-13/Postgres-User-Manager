@@ -3,26 +3,13 @@ const url = require('url');
 require('dotenv').config()
 
 const DBConnectionString = process.env.DATABASE_URL;
-const params = url.parse(DBConnectionString);
-const auth = params.auth.split(':');
-
-let SSL = process.env.SSL || { rejectUnauthorized: false };
-if (SSL === 'false') {
+if (DBConnectionString.includes('@localhost:5432')) {
     SSL = false;
-} else if (SSL === 'heroku') {
-    SSL = { rejectUnauthorized: false };
+} else {
+    SSL = {sslmode: 'require', rejectUnauthorized: false };
 }
 
-const config = {
-    user: auth[0],
-    password: auth[1],
-    host: params.hostname,
-    port: params.port,
-    database: params.pathname.split('/')[1],
-    ssl: SSL
-}
-
-const pool = new Pool(config);
+const pool = new Pool({connectionString:DBConnectionString, ssl:SSL});
 
 const getList = (req, res) => {
     pool.query('select * from users', (err, results) => {
