@@ -11,8 +11,6 @@ if (SSL === 'false') {
     SSL = false;
 } else if (SSL === 'heroku') {
     SSL = { rejectUnauthorized: false };
-} else {
-    SSL = true;
 }
 
 const config = {
